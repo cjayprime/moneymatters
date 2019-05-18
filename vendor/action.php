@@ -106,11 +106,26 @@
                     $query = mysqli_query($database,$sql);
                     
                     $id = mysqli_insert_id($database);
-                    $sql = "UPDATE `reset` SET `identification` = '".md5(md5($id))."' WHERE `reset_id` = '$id' LIMIT 1";
+                    $code = md5(md5($id));
+                    $sql = "UPDATE `reset` SET `identification` = '".$code."' WHERE `reset_id` = '$id' LIMIT 1";
                     $query = mysqli_query($database,$sql);
                     $num = mysqli_affected_rows($database);
                     if($num > 0){
                         //Email the identification here
+                        $to      = $email;
+                        $subject = 'Password reset verification code';
+                        //$message = '<div style="display:flex; justify-content:center; align-items:center; font-size:15px;"><b>'.$code.'<b></div>';
+                        $message = 'Your verification code is: '.$code;
+                        $message = wordwrap($message, 70, "\r\n");
+                        $headers = "From: Moneymatters Admin <no-reply@moneymatters.com.ng>\r\n";
+                        $headers .= "MIME-Version: 1.0\r\n";
+                        //$headers .= "Content-Type: text/html;";
+                        
+                        if(!mail($to, $subject, $message, $headers))
+                        exit('{"success":false,"message":"No. The operation was unsuccessful. A fatal error occurred. Mail not sent. Error 1.","data":null}');
+                    
+                    }else{
+                        exit('{"success":false,"message":"The operation was unsuccessful. A fatal error occurred. Mail not sent. Error 2.","data":null}');
                     }
                     $data = '{"verification":"'.$id.'"}';
                 }
