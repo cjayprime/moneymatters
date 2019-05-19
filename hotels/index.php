@@ -46,8 +46,8 @@
         <div class="col-md-5 ">
           <div class="theme-search-area-tabs">
             <div class="theme-search-area-tabs-header">
-              <h1 class="theme-search-area-tabs-title">Book a Hotel</h1>
-              <p class="theme-search-area-tabs-subtitle theme-search-area-tabs-subtitle-sm">Compare hundreds of hotels at once</p>
+              <h1 class="theme-search-area-tabs-title">Save Big on Hotel Bookings</h1>
+              <p class="theme-search-area-tabs-subtitle theme-search-area-tabs-subtitle-sm">Find, compare and book great deals from local & international hotels.</p>
             </div>
             <div class="tabbable">
               <div class="tab-content _pt-20">
@@ -423,8 +423,8 @@
             <div class="feature">
               <i class="feature-icon feature-icon-gray feature-icon-box feature-icon-round fa fa-globe"></i>
               <div class="feature-caption _op-07">
-                <h5 class="feature-title">Explore the World</h5>
-                <p class="feature-subtitle">Start to discrover. We will help you to visit any place you can imagine</p>
+                <h5 class="feature-title">Explore Hotels Worldwide</h5>
+                <p class="feature-subtitle">Discover and book hotels from around the globe. No matter your destination, your ideal comfort is guaranteed.</p>
               </div>
             </div>
           </div>
@@ -432,8 +432,8 @@
             <div class="feature">
               <i class="feature-icon feature-icon-gray feature-icon-box feature-icon-round fa fa-gift"></i>
               <div class="feature-caption _op-07">
-                <h5 class="feature-title">Gifts & Rewards</h5>
-                <p class="feature-subtitle">Get even more from our service. Spend less and travel more</p>
+                <h5 class="feature-title">Exclusive Discounts</h5>
+                <p class="feature-subtitle">Get even more from us. Our occasional exclusive deals ensure you save even more on hotel bookings.</p>
               </div>
             </div>
           </div>
@@ -441,8 +441,8 @@
             <div class="feature">
               <i class="feature-icon feature-icon-gray feature-icon-box feature-icon-round fa fa-credit-card"></i>
               <div class="feature-caption _op-07">
-                <h5 class="feature-title">Best prices</h5>
-                <p class="feature-subtitle">We compare several hotels to find best price for you</p>
+                <h5 class="feature-title">Great Prices Always</h5>
+                <p class="feature-subtitle">We search through thousands of hotels to find the best rates, and make sure you always get the best deals.</p>
               </div>
             </div>
           </div>
@@ -451,7 +451,7 @@
               <i class="feature-icon feature-icon-gray feature-icon-box feature-icon-round fa fa-comments-o"></i>
               <div class="feature-caption _op-07">
                 <h5 class="feature-title">24/7 Support</h5>
-                <p class="feature-subtitle">Contact us anytime, anywhere. We will resolve any issues ASAP</p>
+                <p class="feature-subtitle">Issues with your booking? Feel free to contact us anytime, anywhere. We're always happy to help.</p>
               </div>
             </div>
           </div>
@@ -707,8 +707,8 @@
               <div class="col-md-8 col-md-offset-2">
                 <div class="theme-hero-text theme-hero-text-white theme-hero-text-center">
                   <div class="theme-hero-text-header">
-                    <h2 class="theme-hero-text-title">Pay less get more</h2>
-                    <p class="theme-hero-text-subtitle">Subscribe now and unlock our secret deals. Save up to 70% by getting access to our special offers for finance quotes.</p>
+                    <h2 class="theme-hero-text-title">Sign up & Save more</h2>
+                    <p class="theme-hero-text-subtitle">Subscribe today to unlock even greater deals! Be the first to know, and Save up to 50% on select hotel booking offers.</p>
                   </div>
                   <a class="btn _tt-uc _mt-20 btn-white btn-ghost btn-lg" href="signup.php">Sign Up Now</a>
                 </div>
