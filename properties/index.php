@@ -92,8 +92,8 @@
             <div class="col-md-10 col-md-offset-1">
               <div class="theme-search-area _pv-100 theme-search-area-stacked theme-search-area-white">
                 <div class="theme-search-area-header _ta-c">
-                  <h1 class="theme-search-area-title">Buy a property</h1>
-                  <p class="theme-search-area-subtitle">Search hundreds of properties at once</p>
+                  <h1 class="theme-search-area-title">Buy or rent a property</h1>
+                  <p class="theme-search-area-subtitle">Find and reserve your next home in minutes.</p>
                 </div>
                 <div class="theme-search-area-form" id="hero-search-form">
                   <div class="row" data-gutter="none">
@@ -177,8 +177,8 @@
             <div class="banner _br-5 _bsh-xl _bsh-light banner-animate banner-animate-zoom-in">
               <img class="banner-img" src=".././img/rxgcjsathdq_800x600.jpeg" alt="Image Alternative text" title="Image Title"/>
               <div class="banner-caption _bg-p _p-15 _pos-h-c _w-66pct _mb-30 _ta-c _br-3 banner-caption-bottom">
-                <h5 class="banner-title">Summer Savings</h5>
-                <p class="banner-subtitle">Save up to 30%</p>
+                <h5 class="banner-title">Find a Home</h5>
+                <p class="banner-subtitle">Search thousands of listings.</p>
               </div>
             </div>
           </div>
@@ -186,8 +186,8 @@
             <div class="banner _br-5 _bsh-xl _bsh-light banner-animate banner-animate-zoom-in">
               <img class="banner-img" src=".././img/6vijobrmnbw_800x600.jpeg" alt="Image Alternative text" title="Image Title"/>
               <div class="banner-caption _bg-p _p-15 _pos-h-c _w-66pct _mb-30 _ta-c _br-3 banner-caption-bottom">
-                <h5 class="banner-title">Hunt Lowest Prices</h5>
-                <p class="banner-subtitle">Huge discounts on vacant dates</p>
+                <h5 class="banner-title">Online Reservation</h5>
+                <p class="banner-subtitle">Reserve your choosen property online.</p>
               </div>
             </div>
           </div>
@@ -195,8 +195,8 @@
             <div class="banner _br-5 _bsh-xl _bsh-light banner-animate banner-animate-zoom-in">
               <img class="banner-img" src=".././img/gozxralnit4_800x600.jpeg" alt="Image Alternative text" title="Image Title"/>
               <div class="banner-caption _bg-p _p-15 _pos-h-c _w-66pct _mb-30 _ta-c _br-3 banner-caption-bottom">
-                <h5 class="banner-title">Pay Less, Travel More</h5>
-                <p class="banner-subtitle">Reward points to save more</p>
+                <h5 class="banner-title">24/7 Support</h5>
+                <p class="banner-subtitle">Quality support anytime, anywhere.</p>
               </div>
             </div>
           </div>
@@ -206,7 +206,7 @@
     <div class="theme-page-section theme-page-section-xxl">
       <div class="container">
         <div class="theme-page-section-header">
-          <h5 class="theme-page-section-title">Cities</h5>
+          <h5 class="theme-page-section-title">Search by Cities</h5>
           <p class="theme-page-section-subtitle">Travellers choices for summer trips</p>
         </div>
         <div class="row row-col-gap" data-gutter="10">
@@ -282,8 +282,8 @@
     <div class="theme-page-section _pb-0 theme-page-section-xl theme-page-section-gray">
       <div class="container">
         <div class="theme-page-section-header">
-          <h5 class="theme-page-section-title theme-page-section-title-sm">Trending Apartments</h5>
-          <p class="theme-page-section-subtitle theme-page-section-subtitle-sm">Most viewed vacation rentals in the world</p>
+          <h5 class="theme-page-section-title theme-page-section-title-sm">Trending Properties</h5>
+          <p class="theme-page-section-subtitle theme-page-section-subtitle-sm">Our in-demand, and most viewed properties this week.</p>
         </div>
         <div class="theme-inline-slider row" data-gutter="10">
           <div class="owl-carousel" data-items="5" data-loop="true" data-nav="true">
@@ -358,8 +358,8 @@ EOD;
     <div class="theme-page-section theme-page-section-xl theme-page-section-gray">
       <div class="container">
         <div class="theme-page-section-header">
-          <h5 class="theme-page-section-title theme-page-section-title-sm">Recomended for You</h5>
-          <p class="theme-page-section-subtitle theme-page-section-subtitle-sm">Featured properties</p>
+          <h5 class="theme-page-section-title theme-page-section-title-sm">Recomended Properties</h5>
+          <p class="theme-page-section-subtitle theme-page-section-subtitle-sm">Staff picks just for you.</p>
         </div>
         <div class="theme-inline-slider row" data-gutter="10">
           <div class="owl-carousel" data-items="5" data-loop="true" data-nav="true">
