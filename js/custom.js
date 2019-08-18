@@ -390,3 +390,84 @@ $('.mobile-picker').each(function(i, item){
         });
     }
 });
+
+
+
+//---------------------------------------------------------------
+
+window.MoneyMatters = {};
+
+MoneyMatters.payStackSuccess = function(response, details){
+    $.ajax({
+        url: '../transaction.php',
+        method: 'POST',
+        data: {command: 'verify', action: 'record', identification: details.identification, type: MoneyMatters.platform, reference: response.reference},
+        dataType: 'json',
+        success: function (data) {
+            if(typeof data.success != 'undefined' && data.success){
+                window.location = '../receipt.php?id=' + data.booking_id;
+            }else{
+                /**
+                 * If a transaction is successful as reported 
+                 * by Paystack yet hasn't been verified locally
+                 * then make sure it's verified by sending request again
+                 */
+                setTimeout(function(){
+                    MoneyMatters.payStackSuccess(response, details);
+                },2000);
+                alert('Retrying. An error occurred. Close this dialog to continue.');
+            }
+        },
+        error: function(response){
+            alert('An error occured. Try again.');
+            console.log(response.responseText)
+        }
+    });
+};
+
+MoneyMatters.payWithPayStack = function(details){
+    /**
+    Paystack: https://js.paystack.co/v1/inline.js
+    */
+    var handler = PaystackPop.setup({
+        key: details.key,
+        email: details.email,
+        amount: details.amount,
+        currency: "NGN",
+        firstname: details.firstname,
+        lastname: details.lastname,
+        channels: ['card', 'bank'],
+        label: details.lastname + ' ' + details.firstname + ' (' + details.email + ')',
+        metadata: {
+            custom_fields: [
+                {
+                    display_name: MoneyMatters.platform + ' id: ' + details.identification,
+                    variable_name: MoneyMatters.platform,
+                    value: details.identification
+                },
+                {
+                    display_name: 'Mobile number',
+                    variable_name: 'mobile',
+                    value: details.phone
+                }
+            ]
+        },
+        callback: function(response){
+            MoneyMatters.payStackSuccess(response, details);
+        },
+        onClose: function(){}
+    }); 
+    handler.openIframe();
+}
+
+MoneyMatters.keys = {
+        event: 'pk_test_1c73170aa1a7fd25332b241b40b41484c698ebae',
+        property: 'pk_test_1c73170aa1a7fd25332b241b40b41484c698ebae',
+        insurance: 'pk_test_1c73170aa1a7fd25332b241b40b41484c698ebae',
+        finance: 'pk_test_1c73170aa1a7fd25332b241b40b41484c698ebae',
+
+        hotel: 'pk_test_1c73170aa1a7fd25332b241b40b41484c698ebae',
+        insurance: 'pk_test_1c73170aa1a7fd25332b241b40b41484c698ebae',
+        travel: 'pk_test_1c73170aa1a7fd25332b241b40b41484c698ebae',
+        offer: 'pk_test_1c73170aa1a7fd25332b241b40b41484c698ebae'
+};

@@ -3,6 +3,24 @@
   session_start();
 
   $database = mysqli_connect("localhost","root","","moneymatters");
+  $keys = array(
+		"event" => array(
+			"private" => "sk_test_f297e77cc33efa13944852c47667cfdb8adab885",
+			"public" => "pk_test_1c73170aa1a7fd25332b241b40b41484c698ebae"
+    ),
+		"property" => array(
+			"private" => "sk_test_f297e77cc33efa13944852c47667cfdb8adab885",
+			"public" => "pk_test_1c73170aa1a7fd25332b241b40b41484c698ebae"
+    ),
+		"insurance" => array(
+			"private" => "sk_test_f297e77cc33efa13944852c47667cfdb8adab885",
+			"public" => "pk_test_1c73170aa1a7fd25332b241b40b41484c698ebae"
+		),
+		"finance" => array(
+			"private" => "sk_test_f297e77cc33efa13944852c47667cfdb8adab885",
+			"public" => "pk_test_1c73170aa1a7fd25332b241b40b41484c698ebae"
+		)
+  );
   
   $admin_id = 0;
   $vendor_id = 0;

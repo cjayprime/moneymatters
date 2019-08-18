@@ -8,11 +8,11 @@ $(document).ready(function(){
 
         var date = $("#from").data("DateTimePicker").date();
         var date = new Date(date._d.getTime() + (60*60*1000));
-        var from = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()// + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+        var from = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
         
         var date = $("#to").data("DateTimePicker").date();
         var date = new Date(date._d.getTime() + (60*60*1000));
-        var to = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()// + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+        var to = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
         
         //Title
         var title = $('#title').val();
@@ -36,6 +36,8 @@ $(document).ready(function(){
         window.location = 'results.php?location='+location+'&from='+from+'&to='+to+'&guests='+guests+'&title='+title+'&'+prices+'&'+duration+'&'+checkboxes;
     });
 
+
+
     //RESULTS PAGE
     $("#duration").ionRangeSlider({
         type: "double",
@@ -49,7 +51,6 @@ $(document).ready(function(){
 
 
 
-
     //LISTING PAGE
     $('#book').click(function(){
         var id = $('#total-booking').data('id');
@@ -58,7 +59,20 @@ $(document).ready(function(){
         var email = $('#email').val();
         var phone = $('#phone').val();
         
-        window.location = 'payment.php?id='+id+'&firstname='+firstname+'&lastname='+lastname+'&email='+email+'&phone='+phone;
+        if(firstname && lastname && email && phone){
+            window.location = 'payment.php?id='+id+'&firstname='+firstname+'&lastname='+lastname+'&email='+email+'&phone='+phone;
+        }else{
+            if(!firstname)$('#firstname').parents('.theme-search-area-section-inner').css({border: '1px solid red'});
+            if(!lastname)$('#lastname').parents('.theme-search-area-section-inner').css({border: '1px solid red'});
+            if(!email)$('#email').parents('.theme-search-area-section-inner').css({border: '1px solid red'});
+            if(!phone)$('#phone').parents('.theme-search-area-section-inner').css({border: '1px solid red'});
+        }
+    });
+    $('#firstname,#lastname,#email,#phone').keyup(function(){
+        if(!$(this).val())
+        $(this).parents('.theme-search-area-section-inner').css({border: '1px solid red'});
+        else
+        $(this).parents('.theme-search-area-section-inner').css({border: '1px solid #d9d9d9'});
     });
     
 
@@ -67,19 +81,22 @@ $(document).ready(function(){
 
 
     //PAYMENT PAGE
-    if($('#details-entry-none').length)
-    $('.theme-payment-page-sections-item-new-link').eq(0).click();
-    
-    $('#book-now').click(function(){
-        if($('#details-entry-none').length)
-        alert('You need to enter your details')
+    MoneyMatters.platform = 'event';
 
-        $.ajax({url:'submit.php',method:'post'
-        ,success:function(){
-            
-        },error:function(){
-            
-        }})
+    $('#book-now').click(function(e){
+        e.preventDefault();
+        var details = {
+            identification: $('#identification').val(),
+            key: MoneyMatters.keys[MoneyMatters.platform], 
+            email: $('#email').val(), 
+            amount: $('#amount').data('value') * 100, 
+            firstname: $('#firstname').val(), 
+            lastname: $('#lastname').val(), 
+            phone: $('#phone').val()
+        };
+        console.log(details);
+
+        if( details.identification && details.key && details.email && details.amount && details.firstname && details.lastname && details.phone )
+        MoneyMatters.payWithPayStack(details);
     });
-
 });

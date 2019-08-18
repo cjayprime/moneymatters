@@ -96,8 +96,8 @@
 
     <div class="az-content-header d-block d-md-flex">
         <div>
-          <h2 class="az-content-title tx-24 mg-b-5 mg-b-lg-8">Manage products</h2>
-          <p class="mg-b-0">View, delete and modify the status of any product.</p>
+          <h2 class="az-content-title tx-24 mg-b-5 mg-b-lg-8">Manage wedding listings</h2>
+          <p class="mg-b-0">View, delete and modify the status of any wedding listing.</p>
         </div>
       </div><!-- az-content-header -->
       <div class="az-content-body">

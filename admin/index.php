@@ -4,10 +4,24 @@
 
     
     //GET Parameters
-    $start = isset($_GET['start']) ? mysqli_real_escape_string($database,$_GET['start']) : '2019-03-23';
-    $end = isset($_GET['end']) ? mysqli_real_escape_string($database,$_GET['end']) : '2019-03-26';
+    if(isset($_GET['start']))
+      $start = mysqli_real_escape_string($database,$_GET['start']);
+    else{
+      $timestamp = strtotime('7 days ago');
+      $start = getdate($timestamp);
+      $start = $start['year'] . '-'  . $start['mon'] . '-' . $start['mday'];
+    }
+    
+    if(isset($_GET['end']))
+      $end = mysqli_real_escape_string($database,$_GET['end']);
+    else{
+      $timestamp = strtotime('today');
+      $end = getdate($timestamp);
+      $end = $end['year'] . '-'  . $end['mon'] . '-' . $end['mday'];
+    }
+    
     $category = isset($_GET['end']) ? mysqli_real_escape_string($database,$_GET['category']) : 'revenue';
-    $type = isset($_GET['type']) ? mysqli_real_escape_string($database,$_GET['type']) : 'hotels';
+    $type = isset($_GET['type']) ? mysqli_real_escape_string($database,$_GET['type']) : 'hotel';
     
 
     //Convert all currencies to $currency or revert to USD if currency doesn't exist
@@ -27,6 +41,7 @@
     $sql = "SELECT * FROM `booking` WHERE (`status` != '-1') AND (`type` = '$type') AND (`date` BETWEEN '$start' AND '$end') ORDER BY `date` ASC";
     $query = mysqli_query($database,$sql);
     $num = mysqli_num_rows($query);
+    //echo mysqli_error($database);
     
     $result = array();
     // All booking data
@@ -175,7 +190,7 @@
                   <div class="media-body">
                     <label>Start Date</label>
                     <div class="date">
-                      <span id="start" style="cursor:pointer;white-space:pre;overflow:hidden;text-overflow:ellipsis;" data-date="2019-3-1"><?php 
+                      <span id="start" style="cursor:pointer;white-space:pre;overflow:hidden;text-overflow:ellipsis;" data-date="<?php echo isset($start) ? $start : '2019-3-1';?>"><?php 
                       
                       $date = strtotime($start);
                       $date_ = getdate($date);
@@ -192,7 +207,7 @@
                   <div class="media-body">
                     <label>End Date</label>
                     <div class="date">
-                    <span id="end" style="cursor:pointer;white-space:pre;overflow:hidden;text-overflow:ellipsis;" data-date="2019-3-1"><?php 
+                    <span id="end" style="cursor:pointer;white-space:pre;overflow:hidden;text-overflow:ellipsis;" data-date="<?php echo isset($end) ? $end : '2019-3-1';?>"><?php 
                       
                       $date = strtotime($end);
                       $date_ = getdate($date);
@@ -228,12 +243,12 @@
                     <div class="date nav-item">
                       <span id="type" class="nav-item with-sub" style="cursor:pointer;"><?php echo ucwords($type)?></span> <a href=""><i class="icon ion-md-arrow-dropdown"></i></a>
                       <nav class="az-menu-sub" style="z-index:10000; color:#000;">
-                        <div class="nav-link" style="cursor:pointer;color:#000;">Hotels</div>
+                        <div class="nav-link" style="cursor:pointer;color:#000;">Hotel</div>
                         <div class="nav-link" style="cursor:pointer;color:#000;">Travel</div>
                         <div class="nav-link" style="cursor:pointer;color:#000;">Finance</div>
                         <div class="nav-link" style="cursor:pointer;color:#000;">Insurance</div>
                         <div class="nav-link" style="cursor:pointer;color:#000;">Wedding</div>
-                        <div class="nav-link" style="cursor:pointer;color:#000;">Events</div>
+                        <div class="nav-link" style="cursor:pointer;color:#000;">Event</div>
                         <div class="nav-link" style="cursor:pointer;color:#000;">Property</div>
                       </nav>
                     </div>
@@ -622,7 +637,6 @@
                       <th class="wd-lg-25p">Date</th>
                       <th class="wd-lg-25p tx-right">Currency</th>
                       <th class="wd-lg-25p tx-right">Amount</th>
-                      <th class="wd-lg-25p tx-right">Rate</th>
                       <th class="wd-lg-25p tx-right">Fee</th>
                     </tr>
                   </thead>
@@ -640,7 +654,6 @@
                         if($i == (count($result) - 6))break;
                         $_currency = $result[$i]['currency'];
                         $amount = $result[$i]['amount'];
-                        $rate = $result[$i]['rate'];
                         $fee = $result[$i]['fee'];
                         $timestamp = strtotime($result[$i]['date']);
                         $phpDate = getdate($timestamp);
@@ -650,7 +663,6 @@
                             <td>{$date}</td>
                             <td class="tx-right tx-medium tx-inverse">{$_currency}</td>
                             <td class="tx-right tx-medium tx-inverse">{$amount}</td>
-                            <td class="tx-right tx-medium tx-inverse">{$rate}</td>
                             <td class="tx-right tx-medium tx-danger">-{$fee}</td>
                           </tr>
 EOT;
@@ -687,6 +699,7 @@ EOT;
                     
                     <?php
                       for($i = count($result) - 1; $i >= 0; $i--){
+                      //for($i = 0; $i < count($result); $i++){
                         if($i == (count($result) - 6))break;
                         $profit = $result[$i]['amount'] - $result[$i]['fee'];
                         $_currency = $result[$i]['currency'];

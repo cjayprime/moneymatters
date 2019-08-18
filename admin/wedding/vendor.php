@@ -94,8 +94,8 @@
 
     <div class="az-content-header d-block d-md-flex">
         <div>
-          <h2 class="az-content-title tx-24 mg-b-5 mg-b-lg-8">Manage insurance vendors</h2>
-          <p class="mg-b-0">View, delete and modify the account status of any insurance vendor.</p>
+          <h2 class="az-content-title tx-24 mg-b-5 mg-b-lg-8">Manage wedding vendors</h2>
+          <p class="mg-b-0">View, delete and modify the account status of any wedding vendor.</p>
         </div>
       </div><!-- az-content-header -->
       <div class="az-content-body">

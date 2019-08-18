@@ -1,14 +1,21 @@
 <?php
     
     require_once('../database.php');
+    
+    if( !isset($_GET['firstname']) || empty($_GET['firstname']) 
+    || !isset($_GET['lastname']) || empty($_GET['lastname']) 
+    || !isset($_GET['email']) || empty($_GET['email']) 
+    || !isset($_GET['phone']) || empty($_GET['phone']) ){
+      header('Location: ./');
+    }
 
     // GET: URL request
     $result_size = 32;
     $result_start = isset($_GET['start']) ? mysqli_real_escape_string($database,$_GET['start']) : 0;
-    //$firstname = isset($_GET['firstname']) ? $_GET['firstname'] : '';
-    //$lastname = isset($_GET['lastname']) ? $_GET['lastname'] : '';
-    //$email = isset($_GET['email']) ? $_GET['email'] : '';
-    //$phone = isset($_GET['phone']) ? $_GET['phone'] : '';
+    $firstname = isset($_GET['firstname']) ? $_GET['firstname'] : '';
+    $lastname = isset($_GET['lastname']) ? $_GET['lastname'] : '';
+    $email = isset($_GET['email']) ? $_GET['email'] : '';
+    $phone = isset($_GET['phone']) ? $_GET['phone'] : '';
     //$address = isset($_GET['address']) ? $_GET['address'] : '';
     $type = isset($_GET['type']) ? mysqli_real_escape_string($database,$_GET['type']) : '';
     $quantity = isset($_GET['quantity']) ? mysqli_real_escape_string($database,$_GET['quantity']) : '';
@@ -148,6 +155,12 @@
           <div class="col-md-3 ">
             <div class="sticky-col _mob-h">
               <div class="theme-search-results-sidebar">
+                
+                <input type="hidden" id="email" value="<?php echo (isset($email) && !empty($email)) ? $email : '';?>"/>
+                <input type="hidden" id="firstname" value="<?php echo (isset($firstname) && !empty($firstname)) ? $firstname : '';?>"/>
+                <input type="hidden" id="lastname" value="<?php echo (isset($lastname) && !empty($lastname)) ? $lastname : '';?>"/>
+                <input type="hidden" id="phone" value="<?php echo (isset($phone) && !empty($phone)) ? $phone : '';?>"/>
+                    
                 <div class="theme-search-results-sidebar-map-view _mb-10 theme-search-results-sidebar-map-view-primary">
                   <a class="theme-search-results-sidebar-map-view-link" id="search-button" href="#"></a>
                   <div class="theme-search-results-sidebar-map-view-body">
@@ -319,7 +332,7 @@ EOD;
                               <p class="theme-search-results-item-price-tag"><span class="currency-symbol">₦</span><span class="currency-value" data-value="{$results[$i]['price']}">{$results[$i]['price']}</span></p>
                               <p class="theme-search-results-item-price-sign">per subscription</p>
                             </div>
-                            <a class="btn btn-primary-inverse btn-block theme-search-results-item-price-btn" href="order.php?id={$results[$i]['id']}" style="background:#ee4a35; box-shadow: 0 2px 30px rgba(255,76,0,0.39);">Purchase Now</a>
+                            <div class="btn btn-primary-inverse btn-block theme-search-results-item-price-btn purchase-now" data-value="{$results[$i]['id']}" data-price="{$results[$i]['price']}" style="background:#ee4a35; box-shadow: 0 2px 30px rgba(255,76,0,0.39);">Purchase Now</div>
                           </div>
                         </div>
                       </div>
@@ -745,7 +758,7 @@ EOD;
     <script src="../js/jquery.js"></script>
     <script src="../js/moment.js"></script>
     <script src="../js/bootstrap.js"></script>
-    <script async defer src="../https://maps.googleapis.com/maps/api/js?key=AIzaSyDYeBBmgAkyAN_QKjAVOiP_kWZ_eQdadeI&callback=initMap&libraries=places"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYeBBmgAkyAN_QKjAVOiP_kWZ_eQdadeI&callback=initMap&libraries=places"></script>
     <script src="../js/owl-carousel.js"></script>
     <script src="../js/blur-area.js"></script>
     <script src="../js/icheck.js"></script>
@@ -764,5 +777,6 @@ EOD;
     <script src="../js/youtube-bg.js"></script>
     <script src="../js/custom.js"></script>
     <script src="../js/fix-insurance.js"></script>
+    <script src="https://js.paystack.co/v1/inline.js"></script>
   </body>
 </html>

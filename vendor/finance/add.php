@@ -101,8 +101,8 @@
     
       <div class="az-content-header d-block d-md-flex">
         <div>
-          <h2 class="az-content-title tx-24 mg-b-5 mg-b-lg-8">Add new property</h2>
-          <p class="mg-b-0">Follow the steps in the wizard to add a new property.</p>
+          <h2 class="az-content-title tx-24 mg-b-5 mg-b-lg-8">Add new product</h2>
+          <p class="mg-b-0">Follow the steps in the wizard to add a new finance product.</p>
         </div>
       </div><!-- az-content-header -->
       <div class="az-content-body">

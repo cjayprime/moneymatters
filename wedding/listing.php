@@ -354,6 +354,9 @@ EOT;
             
             <div class="theme-search-area _p-20 _bg-p _br-4 _mb-20 _bsh theme-search-area-vert theme-search-area-white">
                 <div class="theme-search-area-form" id="hero-search-form">
+                
+                <input id="identification" value="<?php echo isset($wedding_id) ? $wedding_id : ''; ?>" type="hidden"/>
+                        
                 <div class="row" data-gutter="10">
                     <div class="col-md-6 ">
                       <div class="theme-search-area-section theme-search-area-section-curved theme-search-area-section-sm theme-search-area-section-fade-white theme-search-area-section-no-border">
@@ -374,11 +377,24 @@ EOT;
                       </div>
                     </div>
                   </div>
-                  <div class="theme-search-area-section first theme-search-area-section-curved theme-search-area-section-sm theme-search-area-section-fade-white theme-search-area-section-no-border">
-                    <label class="theme-search-area-section-label">Email</label>
-                    <div class="theme-search-area-section-inner">
-                      <i class="theme-search-area-section-icon fa fa-envelope"></i>
-                      <input class="theme-search-area-section-input" id="email" type="text" placeholder="Email"/>
+                  <div class="row" data-gutter="10">
+                    <div class="col-md-6 ">
+                      <div class="theme-search-area-section theme-search-area-section-curved theme-search-area-section-sm theme-search-area-section-fade-white theme-search-area-section-no-border">
+                        <label class="theme-search-area-section-label">Email</label>
+                        <div class="theme-search-area-section-inner">
+                          <i class="theme-search-area-section-icon fa fa-envelope"></i>
+                          <input class="theme-search-area-section-input _mob-h" id="email" value="" type="text" placeholder="Email"/>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6 ">
+                      <div class="theme-search-area-section theme-search-area-section-curved theme-search-area-section-sm theme-search-area-section-fade-white theme-search-area-section-no-border">
+                        <label class="theme-search-area-section-label">Phone</label>
+                        <div class="theme-search-area-section-inner">
+                          <i class="theme-search-area-section-icon fa fa-phone"></i>
+                          <input class="theme-search-area-section-input _mob-h" id="phone" value="" type="text" placeholder="Phone"/>
+                        </div>
+                      </div>
                     </div>
                   </div>
                   <div class="theme-search-area-section theme-search-area-section-curved theme-search-area-section-sm theme-search-area-section-fade-white theme-search-area-section-no-border">

@@ -125,18 +125,22 @@ $(document).ready(function(){
   
   
   
-  //PAYMENT PAGE
-  if($('#details-entry-none').length)
-  $('.theme-payment-page-sections-item-new-link').eq(0).click();
-  $('#book-now').click(function(){
-      if($('#details-entry-none').length)
-      alert('You need to enter your details')
+  //PAYMENT
+    MoneyMatters.platform = 'finance';
 
-      $.ajax({url:'submit.php',method:'post'
-      ,success:function(){
-          
-      },error:function(){
-          
-      }})
-  });
+    $('.purchase-now').click(function(e){
+        e.preventDefault();
+        var details = {
+            identification: $(this).data('value'),
+            key: MoneyMatters.keys[MoneyMatters.platform], 
+            email: $('#email').val(), 
+            amount: $(this).data('price') * 100,
+            firstname: $('#firstname').val(), 
+            lastname: $('#lastname').val(), 
+            phone: $('#phone').val()
+        };
+
+        if( details.identification && details.key && details.email && details.amount && details.firstname && details.lastname && details.phone )
+        MoneyMatters.payWithPayStack(details);
+    });
 });

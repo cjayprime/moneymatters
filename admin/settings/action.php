@@ -45,6 +45,35 @@
                 // If error is the same as data (means there were no changes) and data is more than 1
                 echo '{"success":false,"message":"The operation was unsuccessful while adding to the '.$error[0]['key'].' of '.$error[0]['id'].'. '.$error[0]['append'].'","data":null}';
             }
+        }else if($command == 'create-admin'){
+
+            if(isset($_POST['data'])
+            && isset($_POST['data']['email'])  && !empty($_POST['data']['email'])
+            && isset($_POST['data']['password']) && isset($_POST['data']['password'])){
+            
+                $email = mysqli_real_escape_string($database,$_POST['data']['email']);
+                $password = mysqli_real_escape_string($database,$_POST['data']['password']);
+                $sql = "SELECT * FROM `admin` WHERE `email` = '$email'";
+                $query = mysqli_query($database,$sql);
+                $num = mysqli_affected_rows($database);
+                    
+                if($num == 0){
+                    $sql = "INSERT INTO `admin`(`email`, `password`, `access`, `title`, `page`, `currency`, `country`, `symbol`, `images`, `category`, `type`, `amenities`, `facilities`, `rating`) VALUES('$email', md5('$password'), 'system', 'new-moneymatters', 'new-admin', 'null', 'null', 'null', 'null', 'null', 'null', 'null', 'null', 'null')";
+                    $query = mysqli_query($database,$sql);
+                    $num = mysqli_affected_rows($database);
+                    
+                    if($num > 0){
+                        echo '{"success":true,"message":"You have successfully added a new admin. The admin can now sign in.","data":null}';
+                    }else{
+                        exit('{"success":false,"message":"Bad request.","data":null}');
+                    }
+                }else{
+                    exit('{"success":false,"message":"Admin email already exists.","data":null}');
+                }
+            }else{
+                exit('{"success":false,"message":"Bad request.","data":null}');
+            }
+            
         }else{
             echo '{"success":false,"message":"Bad request.","data":null}';
         }

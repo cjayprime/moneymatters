@@ -2,6 +2,14 @@
     
     require_once('../database.php');
     
+    if( !isset($_GET['id']) || empty($_GET['id'])
+    || !isset($_GET['firstname']) || empty($_GET['firstname']) 
+    || !isset($_GET['lastname']) || empty($_GET['lastname']) 
+    || !isset($_GET['email']) || empty($_GET['email']) 
+    || !isset($_GET['phone']) || empty($_GET['phone']) ){
+      header('Location: listing.php?id='.$_GET['id']);
+    }
+
     // GET: URL request
     $event_id = isset($_GET['id']) ? mysqli_real_escape_string($database,$_GET['id']) : 0;
     $firstname = isset($_GET['firstname']) ? mysqli_real_escape_string($database,$_GET['firstname']) : 0;
@@ -121,6 +129,7 @@
                 <div class="theme-payment-page-form">
                   <div class="row row-col-gap" data-gutter="20">
                     <div class="col-md-6 ">
+                      <input type="hidden" id="identification" value="<?php echo (isset($event_id) && !empty($event_id)) ? $event_id : '';?>"/>
                       <div class="theme-payment-page-form-item form-group">
                         <input class="form-control" type="text" id="firstname" value="<?php echo (isset($firstname) && !empty($firstname)) ? $firstname : '';?>" placeholder="First Name"/>
                       </div>
@@ -601,9 +610,9 @@
                   <div class="theme-payment-page-booking-header">
                     <h3 class="theme-payment-page-booking-title">Total price for this booking</h3>
                     <p class="theme-payment-page-booking-subtitle">By clicking book now button you agree with terms and conditionals and money back gurantee. Thank you for trusting our service.</p>
-                    <p class="theme-payment-page-booking-price"><?php echo (isset($result['price'])) ? '<span class="currency-symbol">₦</span><span class="currency-value" data-value="'.$result['price'].'">'.$result['price'].'</span>' : '$0'; ?></p>
+                    <p class="theme-payment-page-booking-price"><?php echo (isset($result['price'])) ? '<span class="currency-symbol">₦</span><span id="amount" class="currency-value" data-value="'.$result['price'].'">'.$result['price'].'</span>' : '$0'; ?></p>
                   </div>
-                  <a class="btn _tt-uc btn-primary-inverse btn-lg btn-block" id="book-now" href="order.php" style="background:#ee4a35; box-shadow: 0 2px 30px rgba(255,76,0,0.39);">Book Now</a>
+                  <a class="btn _tt-uc btn-primary-inverse btn-lg btn-block" id="book-now" href="" style="background:#ee4a35; box-shadow: 0 2px 30px rgba(255,76,0,0.39);">Book Now</a>
                 </div>
               </div>
             </div>
@@ -685,6 +694,7 @@
     <script src="../js/fitvid.js"></script>
     <script src="../js/youtube-bg.js"></script>
     <script src="../js/custom.js"></script>
-    <script src="../js/fix-properties.js"></script>
+    <script src="../js/fix-events.js"></script>
+    <script src="https://js.paystack.co/v1/inline.js"></script>
   </body>
 </html>

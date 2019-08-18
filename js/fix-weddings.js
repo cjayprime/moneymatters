@@ -38,10 +38,43 @@ $(document).ready(function(){
         var firstname = $('#firstname').val();
         var lastname = $('#lastname').val();
         var email = $('#email').val();
+        var phone = $('#phone').val();
         var message = $('#message').val();
 
-        console.log(firstname,lastname,email,message)
-        //window.location = 'payment.php?id='+id+'&firstname='+firstname+'&lastname='+lastname+'&email='+email+'&phone='+phone;
+        if(firstname && lastname && email && phone && message){
+            $.ajax({
+                url: 'inquiry.php',
+                method: 'POST',
+                data: {firstname: firstname, lastname: lastname, email: email, phone: phone, message: message},
+                dataType: 'json',
+                success: function (data) {
+                    if(typeof data.success != 'undefined' && data.success){
+                        alert('Successfully saved your inquiry. You will be contacted shortly.');
+                    }else{
+                        
+                    }
+                },
+                error: function(response){
+                    alert('An error occured. Try again.');
+                    console.log(response.responseText)
+                }
+            });
+        }else{
+            if(!firstname)$('#firstname').parents('.theme-search-area-section-inner').css({border: '1px solid red'});
+            if(!lastname)$('#lastname').parents('.theme-search-area-section-inner').css({border: '1px solid red'});
+            if(!email)$('#email').parents('.theme-search-area-section-inner').css({border: '1px solid red'});
+            if(!phone)$('#phone').parents('.theme-search-area-section-inner').css({border: '1px solid red'});
+            if(!message)$('#message').parents('.theme-search-area-section-inner').css({border: '1px solid red'});
+        }
     });
+    $('#firstname,#lastname,#email,#phone,#message').keyup(function(){
+        if(!$(this).val())
+        $(this).parents('.theme-search-area-section-inner').css({border: '1px solid red'});
+        else
+        $(this).parents('.theme-search-area-section-inner').css({border: '1px solid #d9d9d9'});
+    })
+    
+    
+    .val('Ok');
     
 });

@@ -1,5 +1,13 @@
 <?php
     require_once('../database.php');
+    
+    if( !isset($_GET['id']) || empty($_GET['id'])
+    || !isset($_GET['firstname']) || empty($_GET['firstname']) 
+    || !isset($_GET['lastname']) || empty($_GET['lastname']) 
+    || !isset($_GET['email']) || empty($_GET['email']) 
+    || !isset($_GET['phone']) || empty($_GET['phone']) ){
+      header('Location: listing.php?id='.$_GET['id']);
+    }
 
     // GET: URL request
     $property_id = isset($_GET['id']) ? mysqli_real_escape_string($database,$_GET['id']) : 0;
@@ -125,6 +133,7 @@
                 <h3 class="theme-payment-page-sections-item-title">Confirm Details</h3>
                 <div class="theme-payment-page-form">
                   <div class="row row-col-gap" data-gutter="20">
+                    <input type="hidden" id="identification" value="<?php echo (isset($property_id) && !empty($property_id)) ? $property_id : '';?>"/>
                     <div class="col-md-6 ">
                       <div class="theme-payment-page-form-item form-group">
                         <input class="form-control" type="text" id="firstname" placeholder="First Name"/>
@@ -606,7 +615,7 @@
                     <p class="theme-payment-page-booking-price">
                       
                       
-                      <span class="currency-symbol">₦</span><?php echo isset($result['price']) ? '<span class="currency-value" data-value="'.(0.05 * $result['price']).'">'.(0.05 * $result['price']).'</span>' : '0';?>
+                      <span class="currency-symbol">₦</span><?php echo isset($result['price']) ? '<span class="currency-value" id="amount" data-value="'.(0.05 * $result['price']).'">'.(0.05 * $result['price']).'</span>' : '0';?>
                     
                   
                     </p>
@@ -703,5 +712,6 @@
     <script src="../js/youtube-bg.js"></script>
     <script src="../js/custom.js"></script>
     <script src="../js/fix-properties.js"></script>
+    <script src="https://js.paystack.co/v1/inline.js"></script>
   </body>
 </html>

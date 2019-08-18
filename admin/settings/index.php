@@ -256,7 +256,7 @@
       </a>
     </div><!-- card-header -->
 
-    <div id="collapseZero" data-parent="#accordion" class="collapse show" role="tabpanel" aria-labelledby="headingZero">
+    <div id="collapseZero" data-parent="#accordion" class="collapse" role="tabpanel" aria-labelledby="headingZero">
       <div class="card-body">
         
 
@@ -311,9 +311,50 @@ EOT;
 
 
       </div>
+    </div><div class="card-header" role="tab" id="headingZero">
+      <a data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        Admin
+      </a>
+    </div><!-- card-header -->
+
+    <div id="collapseOne" data-parent="#accordion" class="collapse show" role="tabpanel" aria-labelledby="headingZero">
+      <div class="card-body">
+        
+
+        <div class="wizard settings">
+            <h3>Add a new admin</h3>
+            <section>
+                <div class="row row-sm mg-t-40">
+                  <div class="col-md-6">
+                      <label class="form-control-label">Enter the admin's email: <span class="tx-danger">*</span></label>
+                      <div class="input-group">
+                          <div class="input-group-prepend">
+                              <div class="input-group-text">
+                                  <i class="typcn typcn-flag-outline tx-24 lh--9 op-6"></i>
+                              </div>
+                          </div>
+                          <input style="width:55%;" class="settings-new-option form-control" placeholder="Enter the admin's email" id="admin-email" type="text" required>
+                      </div>
+                  </div><!-- col -->
+                  <div class="col-md-6">
+                      <label class="form-control-label">Enter the admin's password: <span class="tx-danger">*</span></label>
+                      <div class="input-group">
+                          <div class="input-group-prepend">
+                              <div class="input-group-text">
+                                  <i class="typcn typcn-flag-outline tx-24 lh--9 op-6"></i>
+                              </div>
+                          </div>
+                          <input style="width:55%;" class="settings-new-option form-control" placeholder="Enter the admin's password" id="admin-password" type="text" required>
+                      </div>
+                  </div><!-- col -->
+            </section>
+        </div>
+
+
+      </div>
     </div>
   </div>
-  
+
 
 
 
@@ -790,7 +831,6 @@ EOT;
     <script src="../../lib/parsleyjs/parsley.min.js"></script>
     <script src="../../lib/select2/js/select2.min.js"></script>
     <script src="../../lib/pickerjs/picker.min.js"></script>
-    <script src="admin.js"></script>
     <script>
       $(function(){
         'use strict'
@@ -832,11 +872,37 @@ EOT;
         var SelectedFiles = [];
         $(document).ready(function() {
             window.MoneyMatters = {
-                save: function(id){
+                saveAdmin: function(data){
+                  var post = {
+                    command: 'create-admin',
+                    id: 'add',
+                    data:{email: data.email, password: data.password}
+                  };
+                    
+                  $.ajax({url: 'action.php',data: post,
+                      method:'POST',
+                      dataType:"json",
+                      success:function(res,status,xhr){
+                        console.log(res);
+                        if(res.success)
+                        MoneyMatters.success(res.message,'You have successfully added a new admin.');
+                        else
+                        MoneyMatters.error(res.message,'An error occurred, check the form and try again.');
+                      },
+                      error:function(res,status,xhr){
+                        console.log(res.responseText);
+                        MoneyMatters.error(res.responseText,'A fatal error occurred, try again, if the error persists, contact support.');
+                      },
+                      //contentType: false,
+                      //processData: false
+                  });
+
+                },
+                saveGeneral: function(id){
                     var post = {
-                        command: 'edit',
-                        id: id,
-                        data:{}
+                      command: 'edit',
+                      id: id,
+                      data:{}
                     };
                     //id can only be ['settings','finance','insurance','wedding','event','offer','property']
                     $('.'+id).find('.list-group').each(function(){
@@ -894,27 +960,40 @@ EOT;
                     return true;
                 },
                 onFinishing: function(event, currentIndex){
-                  var classes = ['settings','finance','insurance','wedding','event','offer','property']
-                  var empty = false;
-                  for(var i = 0; i < classes.length; i++){
-                    self.find('.settings-entry-option').each(function(){
-                      //No input must ever be empty
-                      if(!isNaN(parseFloat($(this).val())) && isFinite($(this).val())){
-                        $(this).css({border: '1px solid #cdd4e0'});
-                      }else{
-                        $(this).css({border: '1px solid #dc3545'});
-                        empty = true;
-                      }
-                    });
-                    if(empty == false && self.hasClass(classes[i]))
-                    MoneyMatters.save(classes[i]);
+                  if($(this).find('#admin-email').length){
+                    var email = $(this).find('#admin-email').val();
+                    var password = $(this).find('#admin-password').val();
+                    if(email && password){
+                      $(this).find('#admin-email,#admin-password').css({border: '1px solid #cdd4e0'});
+                      MoneyMatters.saveAdmin({email: email, password: password});
+                    }else{
+                      if(!email)$(this).find('#admin-email').css({border: '1px solid #dc3545'});
+                      if(!password)$(this).find('#admin-password').css({border: '1px solid #dc3545'});
+                    }
+                  }else{
+                    var classes = ['settings','finance','insurance','wedding','event','offer','property']
+                    var empty = false;
+                    for(var i = 0; i < classes.length; i++){
+                      self.find('.settings-entry-option').each(function(){
+                        //No input must ever be empty
+                        if(!isNaN(parseFloat($(this).val())) && isFinite($(this).val())){
+                          $(this).css({border: '1px solid #cdd4e0'});
+                        }else{
+                          $(this).css({border: '1px solid #dc3545'});
+                          empty = true;
+                        }
+                      });
+                      if(empty == false && self.hasClass(classes[i]))
+                      MoneyMatters.saveGeneral(classes[i]);
+                    }
                   }
                 },
                 onStepChanged: function(){} 
               });
             });
 
-            $(document).on('keyup','textarea,input[type=text]',function(){
+            //$(document).on('keyup','textarea,input[type=text]',function(){
+            $('textarea,input[type=text]').keyup(function(){
                 if($(this).val().length > 0)
                 $(this).css({border:'1px solid #cdd4e0'});
             });

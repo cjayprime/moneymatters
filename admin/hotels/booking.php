@@ -1,7 +1,7 @@
 <?php
   require_once('../../database.php');
     
-  $sql = "SELECT * FROM `booking` WHERE `type` = 'hotels' ORDER BY `status`";
+  $sql = "SELECT * FROM `booking` WHERE `type` = 'hotel' ORDER BY `status`";
   $query = mysqli_query($database,$sql);
   $num = mysqli_num_rows($query);
   
@@ -95,8 +95,8 @@
 
     <div class="az-content-header d-block d-md-flex">
         <div>
-          <h2 class="az-content-title tx-24 mg-b-5 mg-b-lg-8">Manage insurance bookings</h2>
-          <p class="mg-b-0">View and complete any provider booking and it's receipt.</p>
+          <h2 class="az-content-title tx-24 mg-b-5 mg-b-lg-8">Manage hotel bookings</h2>
+          <p class="mg-b-0">View and complete any hotel booking and it's receipt.</p>
         </div>
       </div><!-- az-content-header -->
       <div class="az-content-body">
@@ -164,7 +164,7 @@ EOT;
                 <td>{$result[$i]['type_id']}</td>
                 <td>{$result[$i]['amount']}</td>
                 <td style="display:flex;justify-content:space-between;align-items:flex-start">
-                  <a href="../../events/order.php?id={$result[$i]['booking_id']}"><button type="button" class="btn btn-indigo">View Receipt</button></a>
+                  <a href="../../receipt.php?id={$result[$i]['booking_id']}"><button type="button" class="btn btn-indigo">View Receipt</button></a>
                   {$status_html}
                 </td>
             </tr>

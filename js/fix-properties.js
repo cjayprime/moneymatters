@@ -43,7 +43,20 @@ $(document).ready(function(){
         var email = $('#email').val();
         var phone = $('#phone').val();
         
-        window.location = 'payment.php?id='+id+'&firstname='+firstname+'&lastname='+lastname+'&email='+email+'&phone='+phone;
+        if(firstname && lastname && email && phone){
+            window.location = 'payment.php?id='+id+'&firstname='+firstname+'&lastname='+lastname+'&email='+email+'&phone='+phone;
+        }else{
+            if(!firstname)$('#firstname').parents('.theme-search-area-section-inner').css({border: '1px solid red'});
+            if(!lastname)$('#lastname').parents('.theme-search-area-section-inner').css({border: '1px solid red'});
+            if(!email)$('#email').parents('.theme-search-area-section-inner').css({border: '1px solid red'});
+            if(!phone)$('#phone').parents('.theme-search-area-section-inner').css({border: '1px solid red'});
+        }
+    });
+    $('#firstname,#lastname,#email,#phone').keyup(function(){
+        if(!$(this).val())
+        $(this).parents('.theme-search-area-section-inner').css({border: '1px solid red'});
+        else
+        $(this).parents('.theme-search-area-section-inner').css({border: '1px solid #d9d9d9'});
     });
     
 
@@ -87,18 +100,6 @@ $(document).ready(function(){
 
     });*/
     
-    $('#book-now').click(function(){
-        if($('#details-entry-none').length)
-        alert('You need to enter your details')
-
-        $.ajax({url:'submit.php',method:'post'
-        ,success:function(){
-            
-        },error:function(){
-            
-        }})
-    });
-
     /*
     var date = (new Date());
     var days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -143,4 +144,24 @@ $(document).ready(function(){
         }
     });
     */
+   
+    //PAYMENT PAGE
+    MoneyMatters.platform = 'property';
+
+    $('#book-now').click(function(e){
+        e.preventDefault();
+        var details = {
+            identification: $('#identification').val(),
+            key: MoneyMatters.keys[MoneyMatters.platform], 
+            email: $('#email').val(), 
+            amount: $('#amount').data('value') * 100, 
+            firstname: $('#firstname').val(), 
+            lastname: $('#lastname').val(), 
+            phone: $('#phone').val()
+        };
+
+        if( details.identification && details.key && details.email && details.amount && details.firstname && details.lastname && details.phone )
+        MoneyMatters.payWithPayStack(details);
+    });
+
 });

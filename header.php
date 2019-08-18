@@ -66,6 +66,11 @@
         }
         $class = 'navbar navbar-default navbar-inverse navbar-theme';
         if($options['subpage'] === 'signup' || $options['subpage'] === 'signin' || $options['subpage'] === 'reset')$class = "navbar navbar-default navbar-inverse navbar-theme navbar-theme-abs navbar-theme-transparent navbar-theme-border";
+    }else if($options['page'] === 'order'){
+        $menu = array('Home' => 'index.php','Search' => 'results.php','Blog' => '','Guide' => '','FAQs' => '');
+        $class = 'navbar navbar-default navbar-inverse navbar-theme navbar-theme-abs navbar-theme-transparent navbar-theme-border';
+        if($options['subpage'] === 'results')$class = 'navbar navbar-default navbar-theme';
+        if($options['subpage'] === 'payment' || $options['subpage'] === 'order')$class = 'navbar navbar-default navbar-inverse navbar-theme';
     }
 
     $navigation = '';
@@ -144,6 +149,8 @@ EOT;
 EOT;
     }
 
+    $link = $options['page'] === 'order' ? '' : '../';
+
     echo
     <<<EOT
     <nav class="{$class}" id="main-nav">
@@ -157,7 +164,7 @@ EOT;
                 <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="" style="display:flex;flex-direction:row;">
-                    <img src="../img/logo_big.png" alt="Image Alternative text" title="Image Title"/>
+                    <img src="{$link}img/logo_big.png" alt="Image Alternative text" title="Image Title"/>
                     <span style="margin-left:10px;font-size:17px;font-weight:600;">Moneymatters</span>
                 </a>
             </div>

@@ -107,8 +107,8 @@
 
     <div class="az-content-header d-block d-md-flex">
         <div>
-          <h2 class="az-content-title tx-24 mg-b-5 mg-b-lg-8">Add new event</h2>
-          <p class="mg-b-0">Follow the steps in the wizard to add a new event.</p>
+          <h2 class="az-content-title tx-24 mg-b-5 mg-b-lg-8">Add new wedding vendor</h2>
+          <p class="mg-b-0">Follow the steps in the wizard to add a new wedding vendor.</p>
         </div>
       </div><!-- az-content-header -->
       <div class="az-content-body">

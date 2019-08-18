@@ -150,6 +150,26 @@
               </thead>
               <tbody>
 EOT;
+            for($i = 0; $i < count($result); $i++){
+              $booking = json_encode($result[$i]);
+              $status = $result[$i]['status'] == 0 ? '' : ($result[$i]['status'] == 1 ? 'green' : 'red');
+              $status_text = $result[$i]['status'] == 0 ? 'Complete <i class="typcn typcn-chevron-right"></i>' : ($result[$i]['status'] == 1 ? 'Completed' :  'Error');
+              $status_html = $status == '' ? '<a href="ok.com"><button data-booking=\''.$booking.'\' type="button" class="btn btn-indigo" style="width:120px;background-color:'.$status.'">'.$status_text.'</button></a>' : '<button data-booking=\''.$booking.'\' type="button" class="btn btn-indigo" style="cursor:text;width:120px;background-color:'.$status.'">'.$status_text.'</button>';
+              
+              echo <<<EOT
+              <tr>
+                <td class="details-control" data-booking='{$booking}' style="cursor:pointer;background:url('../../img/details_open.png') no-repeat center center;"></td>
+                <td>{$result[$i]['booking_id']}</td>
+                <td>{$result[$i]['date']}</td>
+                <td>{$result[$i]['type_id']}</td>
+                <td>{$result[$i]['amount']}</td>
+                <td style="display:flex;justify-content:space-between;align-items:flex-start">
+                  <a href="../../receipt.php?id={$result[$i]['booking_id']}"><button type="button" class="btn btn-indigo">View Receipt</button></a>
+                  {$status_html}
+                </td>
+            </tr>
+EOT;
+            }
 
             echo <<<EOT
             </tbody>
