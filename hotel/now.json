@@ -1,7 +1,1 @@
-{
-    "version": 2,
-    "builds": [
-      { "src": "old.php", "use": "@now/php" },
-      { "src": "new.php", "use": "now-php" }
-    ]
-}
+{"functions":{"index.php":{"runtime":"now-php@0.0.9"}},"name":"moneymatters"}
